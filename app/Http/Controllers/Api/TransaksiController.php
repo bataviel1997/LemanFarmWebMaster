@@ -90,7 +90,6 @@ class TransaksiController extends Controller
         } else {
             $this->error('Transaksi Gagal');
         }
-
     }
 
     public function error($pesan) {    // handling error
