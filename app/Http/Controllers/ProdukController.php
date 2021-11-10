@@ -94,6 +94,9 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Produk::findOrFail($id);
+        Cloudinary::destroy($id->public_id);
+        $id->delete();
+        return redirect()->route('produk.index')->with('success', 'Data has been deleted!');
     }
 }

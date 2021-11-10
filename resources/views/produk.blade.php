@@ -48,13 +48,21 @@
                       <td>{{ $data->updated_at }}</td>
                       
                       <td>
-                        <a href="#">
+                        <!-- <a href="#">
                             <i class="fa fa-edit blue"></i>
                         </a>
                         /
                         <a href="#">
                             <i class="fa fa-trash red"></i>
-                        </a>
+                        </a> -->
+                        <td>
+                                <form action="{{ route('produk.destroy', $data->id) }}" method="post"
+                                    class="sa-remove" id="data-{{ $data->id }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                  </form>
+                                    <button onclick="deleteRow({{ $data->id }})" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Delete</button>   
+                            </td>
                       </td>
                     </tr>
                     @endforeach
@@ -105,7 +113,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="form-group">
                         <label>Deskripsi</label>
                         <textarea class="form-control" rows="3" placeholder="Deskripsi ..." name="deskripsi"></textarea>
@@ -121,14 +128,10 @@
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Tambah</button>
-                </div>
-
-            
-            
+                </div>            
           </div>
         </div>
       </div>
@@ -136,3 +139,18 @@
     </section>
     <!-- /.content -->
 @endsection
+<script>
+  function deleteRow(id){
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if(willDelete){
+        $('#data-' + id).submit();
+      }
+    })
+  }
+</script>
