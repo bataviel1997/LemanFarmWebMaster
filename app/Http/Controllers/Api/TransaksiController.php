@@ -69,24 +69,23 @@ class TransaksiController extends Controller
 
     public function history($id){
          $transaksis = Transaksi::with(['user'])->whereHas('user', function($query) use($id){
-             $query->whereId($id);      // mengambil data transaksi,dari data transaksi user relasi by id
+             $query->whereId($id);      
+             // mengambil data transaksi,dari data transaksi user relasi by id
          })->get();
 
-
          foreach ($transaksis as $transaksi){
-           $details = $transaksi->details;
-           foreach($details as $detail){
-               $detail->produk;
+            $details = $transaksi->details;
+            foreach($details as $detail){
+                $detail->produk;
            }
 
          }
 
-
-         if(!empty($transaksi)){
+         if(!empty($transaksis)){
             return response()->json([
                     'success' => 1,
                     'message' => 'Transaksi Berhasil',
-                    'transaksis' => collect($transaksi)
+                    'transaksis' => collect($transaksis)
             ]);
         } else {
             $this->error('Transaksi Gagal');

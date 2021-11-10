@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produk;
+use Cloudinary;
+use Carbon\Carbon;
 
 class ProdukController extends Controller
 {
@@ -38,15 +40,14 @@ class ProdukController extends Controller
     {
         // dd($request->all());die();
         //variable kosong..
-       $fileName = '';
-        if($request->image->getClientOriginalName()){
-            $file = str_replace(' ', '', $request->image->getClientOriginalName());
-            $fileName = date('mYdHs').rand(1,999).'_'.$file;
-            $request->image->storeAs('public/produk', $fileName);
-        }
-
+        //push image to couldynary
+        $fileName = Carbon::now()->format('Y-m-d H:i:s').'-'.$request->name;
+        $uploadedFile = $request->file('image')->storeOnCloudinaryAs('produk',$fileName);
+        $image = $uploadedFile->getSecurePath();
+        $public_id = $uploadedFile->getPublicId();
         $user = Produk::create(array_merge($request->all(), [
-            'image' => $fileName
+             'image' =>$image,
+             'public_id'=>$public_id,
         ]));
         return redirect('produk');
     }
