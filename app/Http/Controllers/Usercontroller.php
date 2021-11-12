@@ -30,6 +30,7 @@ class Usercontroller extends Controller
     }
 
     /**
+     * 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,6 +83,8 @@ class Usercontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = User::findOrFail($id);
+        $id->delete();
+        return redirect()->route('user.index')->with('success', 'Data has been deleted!');
     }
 }
