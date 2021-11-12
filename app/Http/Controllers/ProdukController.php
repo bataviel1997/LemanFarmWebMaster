@@ -16,7 +16,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-         $user['listUser'] = Produk::all(); 
+        $user['listUser'] = Produk::all(); 
         return view('produk')->with($user);
     }
 

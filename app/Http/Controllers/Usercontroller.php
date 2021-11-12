@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         // mengambil semua data di dalam database
        $user['listUser'] = User::all(); 
-        return view('user')->with($user);
+       return view('user')->with($user);
     }
 
     /**
