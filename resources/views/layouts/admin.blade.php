@@ -105,31 +105,14 @@
               </p>
             </a>
           </li>
-
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tools"></i>
+          <li class="nav-item">
+            <a href="{{ route('user.index') }}" class="nav-link">
+              <i class="nav-icon far fa-user nav-icon"></i>
               <p>
-                Setting
-                <i class="fas fa-angle-left right"></i> 
+                User
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
-                  <p>User</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lain-Lain</p>
-                </a>
-              </li>
-            </ul>
           </li>
-
           <li class="nav-item">
 
             <a class="nav-link" href="{{ route('logout') }}"
